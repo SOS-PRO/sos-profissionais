@@ -1,33 +1,11 @@
 import Navbar from "@/components/Navbar";
-import Image from "next/image";
 import { google } from "googleapis";
 import Footer from "@/components/Footer";
-import VerifiedIcon from "@mui/icons-material/Verified";
-import RightArrowIcon from "@mui/icons-material/ArrowForwardIos";
 import { jwtDecode } from "jwt-decode";
+import { Professional, Professionals } from "@/components/Professionals";
 
 const GOOGLE_FORM_RESPONSES_SPREADSHEET_ID = process.env.GOOGLE_FORM_RESPONSES_SPREADSHEET_ID;
 const GOOGLE_AUTH_JWT = process.env.GOOGLE_AUTH_JWT;
-
-// Carimbo de data/hora	Endereço de e-mail	Nome do profissional	Nome do escritório ou clínica	Imagem para exibição (opcional)	Telefone para contato	Profissional	Deseja prestar consultoria em qual área?	Deseja prestar atendimento em qual área?	Deseja prestar atendimento em qual área da psicologia?	Áreas de atuação	"Link para agendamento
-// Criar conforme sua disponibilidade em: https://calendar.google.com/calendar/u/0/r/appointment"	Verificado
-type Professional = {
-  id: string;
-  timestamp: Date;
-  email: string;
-  name: string;
-  office: string;
-  image?: string;
-  phone: string;
-  role: string;
-  specialties: string[];
-  calendar: string;
-  verified: boolean;
-};
-
-type ProfessionalCardProps = {
-  professional: Professional;
-};
 
 const getProfessionals = async () => {
   const professionals: Professional[] = [];
@@ -124,94 +102,13 @@ const getProfessionals = async () => {
   );
 };
 
-const ProfessionalCard = ({ professional }: ProfessionalCardProps) => {
-  return (
-    <a
-      className="flex flex-col p-4 bg-white shadow rounded-lg cursor-pointer hover:bg-gray-50"
-      href={professional.calendar}
-      target="_blank"
-    >
-      <div className="flex items-center justify-between">
-        <div className="flex items-center">
-          {professional.image ? (
-            <Image
-              src={professional.image}
-              alt={professional.name}
-              width={48}
-              height={48}
-              className="rounded-full"
-            />
-          ) : (
-            <div className="flex items-center justify-center w-12 h-12 bg-green-500 text-white font-bold rounded-full">
-              {professional.name[0]}
-            </div>
-          )}
-          <div className="ml-4">
-            <h2 className="text-lg font-semibold flex items-center gap-2">
-              {professional.name}
-              {professional.verified && (
-                <span className="text-blue-500">
-                  <VerifiedIcon />
-                </span>
-              )}
-            </h2>
-            <span className="mt-4">
-              <a
-                href={professional.calendar}
-                target="_blank"
-                className="text-blue-500 font-semibold"
-              >
-                Consultar agenda
-              </a>
-            </span>
-            <p className="text-sm text-gray-500">{professional.office}</p>
-          </div>
-        </div>
-        <div className="flex items-center gap-2">
-          <RightArrowIcon />
-        </div>
-      </div>
-      <div className="mt-4 border-t border-gray-200"></div>
-      <div className="mt-4">
-        <h3 className="text-lg font-semibold">Especialidades</h3>
-        <div className="flex gap-2 mt-2 flex-wrap">
-          {professional.specialties.map((specialty) => (
-            <span key={specialty} className="bg-gray-200 text-gray-600 p-2 rounded-lg text-sm">
-              {specialty}
-            </span>
-          ))}
-        </div>
-      </div>
-      <span className="mt-4 text-sm text-gray-500">
-        Atualizado em {new Date(professional.timestamp).toLocaleString()}
-      </span>
-    </a>
-  );
-};
-
 export default async function ProfessionalsPage() {
   const professionals = await getProfessionals();
 
   return (
     <main className="min-h-screen flex flex-col bg-gray-100">
       <Navbar />
-      <div className="container mx-auto p-4 flex-grow">
-        <h1 className="text-2xl">Profissionais disponíveis ({professionals.length})</h1>
-        {/* search bar */}
-        <div className="flex items-center mt-4 mb-4">
-          <input
-            type="text"
-            placeholder="Buscar profissional"
-            className="w-full p-2 border border-gray-300 rounded-lg"
-          />
-          <button className="p-2 ml-2 bg-green-500 text-white rounded-lg">Buscar</button>
-        </div>
-        <div className="grid grid-cols-1 gap-4">
-          {professionals.map((professional: Professional) => (
-            <ProfessionalCard key={professional.id} professional={professional} />
-          ))}
-        </div>
-      </div>
+      <Professionals professionals={professionals} />
       <Footer />
     </main>
   );

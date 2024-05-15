@@ -20,9 +20,9 @@ const Navbar = () => {
         >
           + Cadastro de profissional
         </a>
-        <button className="p-4 hover:bg-white hover:bg-opacity-20 transition-colors duration-200">
+        {/* <button className="p-4 hover:bg-white hover:bg-opacity-20 transition-colors duration-200">
           ⟳
-        </button>
+        </button> */}
       </div>
     </nav>
   );
