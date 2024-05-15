@@ -25,17 +25,7 @@ jobs:
         env:
           NEXT_PUBLIC_GOOGLE_FORM_URL: ${{ secrets.NEXT_PUBLIC_GOOGLE_FORM_URL }}
           GOOGLE_FORM_RESPONSES_SPREADSHEET_ID: ${{ secrets.GOOGLE_FORM_RESPONSES_SPREADSHEET_ID }}
-          GOOGLE_AUTH_TYPE: ${{ secrets.GOOGLE_AUTH_TYPE }}
-          GOOGLE_AUTH_PROJECT_ID: ${{ secrets.GOOGLE_AUTH_PROJECT_ID }}
-          GOOGLE_AUTH_PRIVATE_KEY_ID: ${{ secrets.GOOGLE_AUTH_PRIVATE_KEY_ID }}
-          GOOGLE_AUTH_PRIVATE_KEY: ${{ secrets.GOOGLE_AUTH_PRIVATE_KEY }}
-          GOOGLE_AUTH_CLIENT_EMAIL: ${{ secrets.GOOGLE_AUTH_CLIENT_EMAIL }}
-          GOOGLE_AUTH_CLIENT_ID: ${{ secrets.GOOGLE_AUTH_CLIENT_ID }}
-          GOOGLE_AUTH_AUTH_URI: ${{ secrets.GOOGLE_AUTH_AUTH_URI }}
-          GOOGLE_AUTH_TOKEN_URI: ${{ secrets.GOOGLE_AUTH_TOKEN_URI }}
-          GOOGLE_AUTH_AUTH_PROVIDER_X509_CERT_URL: ${{ secrets.GOOGLE_AUTH_AUTH_PROVIDER_X509_CERT_URL }}
-          GOOGLE_AUTH_CLIENT_X509_CERT_URL: ${{ secrets.GOOGLE_AUTH_CLIENT_X509_CERT_URL }}
-          GOOGLE_AUTH_UNIVERSE_DOMAIN: ${{ secrets.GOOGLE_AUTH_UNIVERSE_DOMAIN }}
+          GOOGLE_AUTH_JWT: ${{ secrets.GOOGLE_AUTH_JWT }}
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_PROUD_SEA_09B32A110 }}
           repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
