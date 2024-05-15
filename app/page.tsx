@@ -4,21 +4,10 @@ import { google } from "googleapis";
 import Footer from "@/components/Footer";
 import VerifiedIcon from "@mui/icons-material/Verified";
 import RightArrowIcon from "@mui/icons-material/ArrowForwardIos";
+import { jwtDecode } from "jwt-decode";
 
 const GOOGLE_FORM_RESPONSES_SPREADSHEET_ID = process.env.GOOGLE_FORM_RESPONSES_SPREADSHEET_ID;
-const GOOGLE_SERVICE_ACCOUNT_JSON = {
-  type: process.env.GOOGLE_AUTH_TYPE,
-  project_id: process.env.GOOGLE_AUTH_PROJECT_ID,
-  private_key_id: process.env.GOOGLE_AUTH_PRIVATE_KEY_ID,
-  private_key: process.env.GOOGLE_AUTH_PRIVATE_KEY,
-  client_email: process.env.GOOGLE_AUTH_CLIENT_EMAIL,
-  client_id: process.env.GOOGLE_AUTH_CLIENT_ID,
-  auth_uri: process.env.GOOGLE_AUTH_AUTH_URI,
-  token_uri: process.env.GOOGLE_AUTH_TOKEN_URI,
-  auth_provider_x509_cert_url: process.env.GOOGLE_AUTH_AUTH_PROVIDER_X509_CERT_URL,
-  client_x509_cert_url: process.env.GOOGLE_AUTH_CLIENT_X509_CERT_URL,
-  universe_domain: process.env.GOOGLE_AUTH_UNIVERSE_DOMAIN,
-};
+const GOOGLE_AUTH_JWT = process.env.GOOGLE_AUTH_JWT;
 
 // Carimbo de data/hora	Endereço de e-mail	Nome do profissional	Nome do escritório ou clínica	Imagem para exibição (opcional)	Telefone para contato	Profissional	Deseja prestar consultoria em qual área?	Deseja prestar atendimento em qual área?	Deseja prestar atendimento em qual área da psicologia?	Áreas de atuação	"Link para agendamento
 // Criar conforme sua disponibilidade em: https://calendar.google.com/calendar/u/0/r/appointment"	Verificado
@@ -46,8 +35,10 @@ const getProfessionals = async () => {
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive",
   ];
+
+  const credentials = jwtDecode(GOOGLE_AUTH_JWT as string) as any;
   const jwt = new google.auth.GoogleAuth({
-    credentials: GOOGLE_SERVICE_ACCOUNT_JSON,
+    credentials,
     scopes,
   });
 
