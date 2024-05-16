@@ -12,6 +12,7 @@ const getProfessionals = async () => {
   const scopes = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive",
+    "https://www.googleapis.com/auth/calendar.readonly"
   ];
 
   const credentials = jwtDecode(GOOGLE_AUTH_JWT as string) as any;
@@ -50,6 +51,7 @@ const getProfessionals = async () => {
         .split(" ")[1]
         .split(":")
         .map((n: string) => parseInt(n, 10));
+        
 
       if (!verified) return;
 

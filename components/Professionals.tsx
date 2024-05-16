@@ -4,8 +4,6 @@ import Image from "next/image";
 import VerifiedIcon from "@mui/icons-material/Verified";
 import RightArrowIcon from "@mui/icons-material/ArrowForwardIos";
 import { useState } from "react";
-import { GoogleCalendar } from "./GoogleCalendar";
-import { Modal } from "./Modal";
 
 export type Professional = {
   id: string;
@@ -30,18 +28,24 @@ const ProfessionalCard = ({ professional, onCalendarClick }: ProfessionalCardPro
   return (
     <div
       className="flex flex-col p-4 bg-white shadow rounded-lg cursor-pointer hover:bg-gray-50"
-      onClick={() => onCalendarClick(professional.calendar)}
+      onClick={() => {
+        onCalendarClick(professional.calendar);
+        // TODO: workaround to open calendar in new tab as the modal is not working in every machine
+        window.open(professional.calendar, "_blank");
+      }}
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center">
           {professional.image ? (
-            <Image
-              src={professional.image}
-              alt={professional.name}
-              width={48}
-              height={48}
-              className="rounded-full"
-            />
+            <div className="w-12 h-12 overflow-hidden rounded-full">
+              <Image
+                src={professional.image}
+                alt={professional.name}
+                width={48}
+                height={48}
+                className="object-cover"
+              />
+            </div>
           ) : (
             <div className="flex items-center justify-center w-12 h-12 bg-green-500 text-white font-bold rounded-full">
               {professional.name[0]}
@@ -56,15 +60,7 @@ const ProfessionalCard = ({ professional, onCalendarClick }: ProfessionalCardPro
                 </span>
               )}
             </h2>
-            <span className="mt-4">
-              {/* <a
-                href={professional.calendar}
-                target="_blank"
-                className="text-blue-500 font-semibold"
-              >
-                Consultar agenda
-              </a> */}
-            </span>
+            <span className="mt-4"></span>
             <p className="text-sm text-gray-500">
               {professional.role} - {professional.office}
             </p>
@@ -92,7 +88,6 @@ const ProfessionalCard = ({ professional, onCalendarClick }: ProfessionalCardPro
   );
 };
 
-
 type ProfessionalsProps = {
   professionals: Professional[];
 };
@@ -116,9 +111,10 @@ export function Professionals({ professionals }: ProfessionalsProps) {
 
   return (
     <>
-      <Modal isOpen={!!selectedCalendar} onClose={() => setSelectedCalendar(null)}>
+      {/* TODO: calendar modal is not working in every machine */}
+      {/* <Modal isOpen={!!selectedCalendar} onClose={() => setSelectedCalendar(null)}>
         <GoogleCalendar calendar={selectedCalendar || ""} />
-      </Modal>
+      </Modal> */}
 
       <div className="container mx-auto p-4 flex-grow">
         <h1 className="text-2xl">Profissionais disponíveis ({professionals.length})</h1>
