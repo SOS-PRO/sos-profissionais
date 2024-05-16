@@ -51,7 +51,7 @@ const getProfessionals = async () => {
         .split(":")
         .map((n: string) => parseInt(n, 10));
 
-      if (verified === "NAO") return;
+      if (!verified) return;
 
       professionals.push({
         id: index.toString(),
