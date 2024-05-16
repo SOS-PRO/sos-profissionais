@@ -56,11 +56,11 @@ const getProfessionals = async () => {
       professionals.push({
         id: index.toString(),
         timestamp: new Date(year, month - 1, day, hour, minute, second),
-        email,
+        email: "",
         name,
         office,
         image,
-        phone,
+        phone: "",
         role,
         specialties: [
           ...(specialty1 ? [specialty1.split(",").map((s: string) => s.trim())] : []),
