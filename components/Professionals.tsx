@@ -31,7 +31,7 @@ const ProfessionalCard = ({ professional, onCalendarClick }: ProfessionalCardPro
       onClick={() => {
         onCalendarClick(professional.calendar);
         // TODO: workaround to open calendar in new tab as the modal is not working in every machine
-        window.open(professional.calendar, "_blank");
+        window.open(professional.calendar);
       }}
     >
       <div className="flex items-center justify-between">
