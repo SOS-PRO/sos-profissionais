@@ -1,27 +1,62 @@
-# Next.js Hybrid Starter
+# SOS Profissionais
 
-[Azure Static Web Apps](https://docs.microsoft.com/azure/static-web-apps/overview) allows you to easily deploy [Next.js](https://nextjs.org/) apps in minutes. Use this repo with the [Azure Static Web Apps Hybrid Next.js tutorial](https://learn.microsoft.com/en-us/azure/static-web-apps/deploy-nextjs-hybrid) to build and customize a new Next.js site.
+O projeto SOS Profissionais foi criado com o objetivo de conectar profissionais voluntários (advogados, médicos e psicólogos) com vítimas das enchentes no Rio Grande do Sul. A plataforma consiste em uma página estática que obtém informações de um formulário do Google preenchido pelos profissionais voluntários, facilitando a coordenação e o acesso a serviços essenciais para os necessitados.
 
-## Running locally
+## Acesso à Aplicação
 
-To run locally, start by installing the Node dependencies. 
+[SOS Profissionais](https://sos-pro.org/)
 
-```bash
-npm install
-```
+## Sobre o Projeto
 
-Start the development server with the following command:
+O objetivo foi desenvolver uma aplicação construída de forma rápida para atender a demanda de conectar profissionais voluntários utilizando ferramentas do Google, como Google Forms, Google Planilhas e Google Appointments.
 
-```bash
-npm run dev
-```
+Esse projeto iniciou a partir de um grupo da comunidade SOS-RS.
 
-Next, open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
+## Comunidade SOS
 
-For richer local development experience, refer to [Set up local development for Azure Static Web Apps](https://docs.microsoft.com/azure/static-web-apps/local-development).
+- [SOS Rio Grande do Sul](https://sos-rs.com/)
+- [GitHub](https://github.com/SOS-RS)
+- [Discord](https://discord.gg/eJTuannsd6)
 
-## How it works
+## Tecnologias Utilizadas
 
-This starter application uses Next.js and React Server Components. By default, all Next.js components are React Server Components, and as such, are handled by Azure Static Web Apps-managed backend functions. Read more about [Next.js support for Azure Static Web Apps](https://learn.microsoft.com/en-us/azure/static-web-apps/nextjs). 
+Este frontend foi desenvolvido utilizando as seguintes tecnologias:
 
-> **Note:** If you use the [Azure Static Web Apps CLI](https://docs.microsoft.com/azure/static-web-apps/local-development), copy the *staticwebapp.config.json* file to the *out* folder, and start the CLI from the *out* folder.
+- [**NextJS**](https://nextjs.org/): Um framework React para produção, com renderização híbrida estática e server-side.
+- [**React**](https://react.dev/): Uma biblioteca JavaScript para construir interfaces de usuário.
+- [**Google APIs**](https://developers.google.com/apis-explorer): Conjunto de APIs que permitem a integração com diversos serviços do Google.
+- [**Tailwind CSS**](https://tailwindcss.com/docs/installation): Framework CSS baseado em classes utilitárias.
+
+Para executar o frontend do aplicativo em seu ambiente local, siga os passos abaixo:
+
+1. Clone o repositório:
+   ```
+   git clone https://github.com/SOS-PRO/sos-profissionais
+   ```
+2. Entre no diretório do projeto:
+   ```
+   cd sos-profissionais
+   ```
+3. Instale as dependências:
+   ```
+   npm install
+   ```
+4. Inicie o servidor de desenvolvimento:
+   ```
+   npm run dev
+   ```
+   O app estará disponível em `http://localhost:3000`.
+
+## Contribuindo
+
+Contribuições são muito bem-vindas! Se você tem interesse em ajudar a melhorar o app, por favor:
+
+1. Faça um fork do repositório.
+2. Crie uma branch para sua feature (`git checkout -b feature/MinhaFeature`).
+3. Faça seus commits (`git commit -m 'Adicionando uma nova feature'`).
+4. Faça push para a branch (`git push origin feature/MinhaFeature`).
+5. Abra um Pull Request.
+
+---
+
+Agradecemos o seu interesse e apoio. Juntos, podemos fazer uma diferença significativa para as vítimas das enchentes no Rio Grande do Sul!
