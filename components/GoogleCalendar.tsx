@@ -7,7 +7,6 @@ type GoogleCalendarProps = {
 export const GoogleCalendar = ({ calendar }: GoogleCalendarProps) => {
   return (
     <iframe
-      //   src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1Nj2AiN7Qp_TnKGIg3mUwj876w9c7pZYOsRtvLbyDKi2LJETLE4uD5I0WnJwxAwxV44XZ0oeaX?gv=true"
       src={calendar}
       style={{ border: 0 }}
       width="100%"
