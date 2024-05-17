@@ -21,18 +21,13 @@ export type Professional = {
 
 type ProfessionalCardProps = {
   professional: Professional;
-  onCalendarClick: (calendar: string) => void;
 };
 
-const ProfessionalCard = ({ professional, onCalendarClick }: ProfessionalCardProps) => {
+const ProfessionalCard = ({ professional }: ProfessionalCardProps) => {
   return (
-    <div
+    <a
       className="flex flex-col p-4 bg-white shadow rounded-lg cursor-pointer hover:bg-gray-50"
-      onClick={() => {
-        onCalendarClick(professional.calendar);
-        // TODO: workaround to open calendar in new tab as the modal is not working in every machine
-        window.open(professional.calendar);
-      }}
+      href={professional.calendar}
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center">
@@ -84,7 +79,7 @@ const ProfessionalCard = ({ professional, onCalendarClick }: ProfessionalCardPro
       <span className="mt-4 text-sm text-gray-500">
         Atualizado em {new Date(professional.timestamp).toLocaleString()}
       </span>
-    </div>
+    </a>
   );
 };
 
@@ -94,7 +89,6 @@ type ProfessionalsProps = {
 
 export function Professionals({ professionals }: ProfessionalsProps) {
   const [search, setSearch] = useState<string>("");
-  const [selectedCalendar, setSelectedCalendar] = useState<string | null>(null);
 
   const filteredProfessionals = professionals.filter((professional) => {
     if (professional.name.toLowerCase().includes(search.toLowerCase())) return true;
@@ -110,33 +104,22 @@ export function Professionals({ professionals }: ProfessionalsProps) {
   });
 
   return (
-    <>
-      {/* TODO: calendar modal is not working in every machine */}
-      {/* <Modal isOpen={!!selectedCalendar} onClose={() => setSelectedCalendar(null)}>
-        <GoogleCalendar calendar={selectedCalendar || ""} />
-      </Modal> */}
-
-      <div className="container mx-auto p-4 flex-grow">
-        <h1 className="text-2xl">Profissionais disponíveis ({professionals.length})</h1>
-        <div className="flex items-center mt-4 mb-4">
-          <input
-            type="text"
-            placeholder="Buscar profissional"
-            className="p-2 border border-gray-200 rounded-lg w-full"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-        </div>
-        <div className="grid grid-cols-1 gap-4">
-          {filteredProfessionals.map((professional: Professional) => (
-            <ProfessionalCard
-              key={professional.id}
-              professional={professional}
-              onCalendarClick={(calendar) => setSelectedCalendar(calendar)}
-            />
-          ))}
-        </div>
+    <div className="container mx-auto p-4 flex-grow">
+      <h1 className="text-2xl">Profissionais disponíveis ({professionals.length})</h1>
+      <div className="flex items-center mt-4 mb-4">
+        <input
+          type="text"
+          placeholder="Buscar profissional"
+          className="p-2 border border-gray-200 rounded-lg w-full"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
       </div>
-    </>
+      <div className="grid grid-cols-1 gap-4">
+        {filteredProfessionals.map((professional: Professional) => (
+          <ProfessionalCard key={professional.id} professional={professional} />
+        ))}
+      </div>
+    </div>
   );
 }
